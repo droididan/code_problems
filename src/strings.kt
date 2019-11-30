@@ -1,13 +1,13 @@
 fun main() {
 //    print(revese4("hello"))
 //    fizzbuzz(1..100)
-//    print(palidrome("abba"))
-
+//    print(palindrome("abba"))
+    print("abba".palindrome())
 }
 
-fun reverse1(n: String): String {
-    return n.split("").reduce { acc, s -> s + acc }
-}
+
+fun reverse1(n: String) = n.split("").reduce { acc, s -> s + acc }
+
 
 fun reverse2(n: String): String {
     var revesed = ""
@@ -30,5 +30,30 @@ fun fizzbuzz(integers: IntRange) {
     }
 }
 
-fun palindrome(str: String) =
-    str == str.split("").reversed().joinToString("")
+fun String.palindrome() = this == toCharArray().reversed().joinToString("")
+
+fun generatePyramid(number: Int): MutableList<String> {
+    val list = mutableListOf<String>()
+
+    val midPoint = ((2 * number) - 1) / 2
+    val columns = (number * 2) - 1
+
+    (0 until number).forEach { row ->
+        var rowStr = ""
+        (0 until columns).forEach { column ->
+            rowStr += if (midPoint - row <= column && midPoint + row >= column) {
+                "#"
+            } else {
+                " "
+            }
+        }
+        list.add(rowStr)
+    }
+
+    return list
+
+}
+
+const val vowels = "aeoiu"
+fun vowels(str: String) =  str.toLowerCase().count { vowels.contains(it) }
+
